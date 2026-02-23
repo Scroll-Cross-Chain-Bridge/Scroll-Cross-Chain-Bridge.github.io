@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scroll Cross Chain Bridge: Fast &amp; Secure Transfers</title>
+<meta name="description" content="Scroll cross chain bridge lets you move assets between Ethereum and Scroll with lower fees and faster confirmations. Learn how it works and start bridging today.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<link rel="canonical" href="https://scroll-cross-chain-bridge.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Scroll Cross Chain Bridge: Fast &amp; Secure Transfers">
+<meta property="og:description" content="Scroll cross chain bridge lets you move assets between Ethereum and Scroll with lower fees and faster confirmations. Learn how it works and start bridging today.">
+<meta property="og:url" content="https://scroll-cross-chain-bridge.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scroll Cross Chain Bridge: Fast &amp; Secure Transfers">
+<meta name="twitter:description" content="Scroll cross chain bridge lets you move assets between Ethereum and Scroll with lower fees and faster confirmations. Learn how it works and start bridging today.">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Scroll Cross Chain Bridge: Fast & Secure Transfers", "description": "Scroll cross chain bridge lets you move assets between Ethereum and Scroll with lower fees and faster confirmations. Learn how it works and start bridging today.", "inLanguage": "en", "dateModified": "2026-02-23", "url": "https://scroll-cross-chain-bridge.github.io/"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://scroll-cross-chain-bridge.github.io"}, {"@type": "ListItem", "position": 2, "name": "Scroll Cross Chain Bridge: Fast & Secure Transfers", "item": "https://scroll-cross-chain-bridge.github.io/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the scroll cross chain bridge?", "acceptedAnswer": {"@type": "Answer", "text": "The scroll cross chain bridge is the official protocol interface that transfers assets between Ethereum and the Scroll Layer 2 by locking tokens on one chain and minting or unlocking equivalents on the other. It relies on smart contracts and zero-knowledge proofs to maintain a one-to-one asset relationship."}}, {"@type": "Question", "name": "How does the scroll cross chain bridge secure my funds?", "acceptedAnswer": {"@type": "Answer", "text": "Scroll cross chain bridge secures funds by anchoring state changes to Ethereum through validity proofs. Each batch of Layer 2 transactions must be cryptographically verified on mainnet before withdrawals are finalized, reducing the risk of fraudulent state transitions."}}, {"@type": "Question", "name": "How long do withdrawals take on the scroll cross chain bridge?", "acceptedAnswer": {"@type": "Answer", "text": "Withdrawals on the scroll cross chain bridge depend on proof generation and Ethereum confirmation times. Because zk-rollups require validity proofs to be verified on mainnet, users may experience a delay compared to simple on-chain transfers."}}, {"@type": "Question", "name": "What fees should I expect when using Scroll bridge?", "acceptedAnswer": {"@type": "Answer", "text": "Users pay Ethereum gas fees for deposits and withdrawals plus Layer 2 execution fees on Scroll. Total cost varies with network congestion, so checking current gas prices before initiating a transaction is advisable."}}, {"@type": "Question", "name": "Can I bridge any ERC-20 token to Scroll?", "acceptedAnswer": {"@type": "Answer", "text": "Not all ERC-20 tokens are automatically supported. Only compatible and recognized tokens can be transferred through the official Scroll bridge, so verify support in the bridge interface before sending assets."}}, {"@type": "Question", "name": "Is scroll cross chain bridge non-custodial?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, the scroll cross chain bridge operates through smart contracts rather than a centralized custodian. Control of assets is enforced by code, meaning no intermediary holds your private keys during the bridging process."}}, {"@type": "Question", "name": "What happens if a transaction fails?", "acceptedAnswer": {"@type": "Answer", "text": "If a deposit transaction fails on Ethereum, funds typically remain in your wallet minus gas fees. If an issue occurs after locking funds, resolution depends on contract logic and network state, so reviewing transaction details on explorers is essential."}}, {"@type": "Question", "name": "Should beginners use the scroll cross chain bridge?", "acceptedAnswer": {"@type": "Answer", "text": "Beginners can use the scroll cross chain bridge, but they should start with small amounts and testnet practice. Understanding wallet management, gas fees, and confirmation mechanics reduces the chance of costly mistakes."}}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===========================================
+   BASE DARK — Deep Slate Premium
+   Template ID: base-dark
+   =========================================== */
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-primary: #0c1018;
+  --bg-secondary: #111822;
+  --bg-card: rgba(255,255,255,0.035);
+  --bg-card-hover: rgba(255,255,255,0.06);
+  --bg-subtle: rgba(255,255,255,0.02);
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --accent-dim: #1d4ed8;
+  --accent-glow: rgba(59,130,246,0.12);
+  --accent-light: rgba(59,130,246,0.08);
+  --gradient-cta: linear-gradient(135deg, #22c55e, #16a34a);
+  --gradient-cta-glow: rgba(34,197,94,0.25);
+  --text-primary: #e8eaed;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --border: rgba(255,255,255,0.07);
+  --border-hover: rgba(255,255,255,0.12);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.4);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,0.5);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+}
+
+body {
+  font-family: 'Figtree', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Subtle grid pattern */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none; z-index: 0;
+}
+
+/* ═══════ PROGRESS BAR ═══════ */
+#progress-bar {
+  position: fixed; top: 0; left: 0; width: 0%; height: 2px;
+  background: var(--accent); z-index: 10000;
+  box-shadow: 0 0 10px rgba(59,130,246,0.5);
+  transition: width 0.1s linear;
+}
+
+/* ═══════ CONTAINERS ═══════ */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+.content-container { max-width: 780px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+/* ═══════ PILL NAVIGATION ═══════ */
+.pill-nav {
+  position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
+  z-index: 9000;
+  background: rgba(12,16,24,0.82);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 50px; padding: 5px 6px;
+  display: flex; align-items: center; gap: 2px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.35s, transform 0.35s;
+  transform: translateX(-50%) translateY(-8px);
+  max-width: 94vw; overflow-x: auto;
+  scrollbar-width: none; -ms-overflow-style: none;
+}
+.pill-nav::-webkit-scrollbar { display: none; }
+.pill-nav.visible { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+
+.pill-nav a {
+  font-family: 'Sora', sans-serif; font-size: 0.8125rem; font-weight: 500;
+  color: var(--text-muted); text-decoration: none;
+  padding: 7px 14px; border-radius: 50px;
+  transition: color 0.2s, background 0.2s; white-space: nowrap;
+}
+.pill-nav a:hover { color: var(--text-primary); background: rgba(255,255,255,0.06); }
+.pill-nav a.active { color: var(--text-primary); background: rgba(255,255,255,0.08); font-weight: 600; }
+
+/*CTA_START*/
+.pill-nav .pill-cta {
+  font-family: 'Sora', sans-serif; font-size: 0.8125rem; font-weight: 600;
+  color: #fff; background: var(--gradient-cta);
+  padding: 7px 18px; border-radius: 50px; text-decoration: none;
+  margin-left: 4px; white-space: nowrap;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 12px var(--gradient-cta-glow);
+}
+.pill-nav .pill-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 20px var(--gradient-cta-glow); }
+/*CTA_END*/
+
+/* ═══════ HERO ═══════ */
+.hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; z-index: 1; padding: 80px 24px;
+}
+.hero::before {
+  content: ''; position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%);
+  width: 700px; height: 600px;
+  background: radial-gradient(ellipse, rgba(59,130,246,0.09) 0%, rgba(59,130,246,0.02) 50%, transparent 70%);
+  filter: blur(60px); pointer-events: none;
+}
+.hero-inner { max-width: 800px; position: relative; }
+
+.hero h1 {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(2.75rem, 7vw, 4.75rem);
+  font-weight: 800; line-height: 1.06; letter-spacing: -0.04em;
+  color: var(--text-primary); margin-bottom: 24px;
+}
+.hero-subtitle {
+  font-size: 1.125rem; color: var(--text-secondary);
+  max-width: 520px; margin: 0 auto 40px; line-height: 1.8;
+}
+
+/*CTA_START*/
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 38px; background: var(--gradient-cta); color: #fff;
+  font-family: 'Sora', sans-serif; font-size: 1.0625rem; font-weight: 600;
+  text-decoration: none; border-radius: 50px;
+  transition: transform 0.25s, box-shadow 0.25s;
+  box-shadow: 0 4px 24px var(--gradient-cta-glow);
+  animation: ctaPulse 3s ease-in-out infinite;
+}
+.hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 36px rgba(34,197,94,0.35); animation: none; }
+.hero-cta svg { width: 18px; height: 18px; }
+@keyframes ctaPulse {
+  0%, 100% { box-shadow: 0 4px 24px var(--gradient-cta-glow); }
+  50% { box-shadow: 0 4px 36px rgba(34,197,94,0.4); }
+}
+/*CTA_END*/
+
+.hero-scroll-hint {
+  position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+  color: var(--text-muted); font-size: 0.7rem; font-family: 'Sora', sans-serif;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  animation: hintPulse 2.5s ease-in-out infinite;
+}
+.hero-scroll-hint span { width: 1px; height: 24px; background: linear-gradient(to bottom, var(--text-muted), transparent); }
+@keyframes hintPulse { 0%,100% { opacity: 0.3; } 50% { opacity: 0.7; } }
+
+/* ═══════ CONTENT AREA ═══════ */
+.content-area { padding: 80px 0; position: relative; z-index: 1; }
+
+.content-area h2 {
+  font-family: 'Sora', sans-serif; font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700; line-height: 1.2; letter-spacing: -0.025em;
+  color: var(--text-primary); margin: 64px 0 20px; padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+  scroll-margin-top: 80px;
+}
+.content-area h2:first-child { margin-top: 0; }
+.content-area h3 {
+  font-family: 'Sora', sans-serif; font-size: 1.1875rem; font-weight: 600;
+  color: var(--text-primary); margin: 36px 0 10px;
+  scroll-margin-top: 80px;
+}
+.content-area h4 { font-family: 'Sora', sans-serif; font-size: 1.0625rem; font-weight: 600; color: var(--text-primary); margin: 24px 0 8px; }
+.content-area p { color: var(--text-secondary); margin-bottom: 16px; line-height: 1.85; }
+.content-area a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-light); transition: border-color 0.2s, color 0.2s; }
+.content-area a:hover { border-bottom-color: var(--accent); color: #93c5fd; }
+.content-area strong { color: var(--text-primary); font-weight: 600; }
+.content-area section { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.03); }
+.content-area section:last-of-type { border-bottom: none; }
+
+/* Intro */
+.content-area .intro { font-size: 1.0625rem; border-left: 2px solid var(--accent); padding-left: 20px; margin-bottom: 40px; border-bottom: none; }
+.content-area .intro p { color: var(--text-secondary); font-size: 1.0625rem; }
+
+/* Capsule */
+.capsule {
+  background: var(--accent-light); border: 1px solid rgba(59,130,246,0.15);
+  border-radius: var(--radius-md); padding: 18px 22px;
+  font-size: 1.0625rem; line-height: 1.7;
+  color: var(--text-primary) !important; margin: 16px 0;
+}
+
+/* Evidence */
+.evidence {
+  font-size: 0.875rem; color: var(--text-muted) !important;
+  background: var(--bg-subtle); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 12px 16px 12px 42px;
+  margin: 12px 0 20px; position: relative;
+}
+.evidence::before {
+  content: '⟟'; position: absolute; left: 14px; top: 12px;
+  font-size: 0.8rem; color: var(--accent);
+}
+
+/* Lists */
+.content-area ul, .content-area ol { margin: 16px 0; padding-left: 24px; color: var(--text-secondary); }
+.content-area li { margin-bottom: 8px; line-height: 1.75; }
+.content-area ul li::marker { color: var(--accent); }
+.content-area ol li::marker { color: var(--accent); font-weight: 600; font-family: 'Sora', sans-serif; }
+
+/* Blockquote */
+.content-area blockquote {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-left: 3px solid var(--accent); padding: 24px 24px 24px 52px;
+  margin: 28px 0; border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  position: relative;
+}
+.content-area blockquote::before {
+  content: '\201C'; position: absolute; left: 16px; top: 12px;
+  font-size: 2.5rem; line-height: 1; color: var(--accent); opacity: 0.5;
+  font-family: Georgia, serif;
+}
+.content-area blockquote p { color: var(--text-primary); font-size: 1.0625rem; font-style: italic; margin: 0; }
+
+/* Table */
+.table-wrap { overflow-x: auto; margin: 24px 0; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); }
+.table-wrap table { width: 100%; border-collapse: collapse; }
+.table-wrap thead { background: rgba(255,255,255,0.04); }
+.table-wrap th { padding: 13px 18px; text-align: left; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+.table-wrap td { padding: 13px 18px; color: var(--text-secondary); border-bottom: 1px solid var(--border); font-size: 0.9375rem; }
+.table-wrap tbody tr:last-child td { border-bottom: none; }
+.table-wrap tbody tr:hover { background: rgba(255,255,255,0.02); }
+
+/* Cards */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 24px 0; }
+.card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-md); padding: 22px;
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+.card:hover { border-color: var(--border-hover); transform: translateY(-2px); box-shadow: 0 0 24px rgba(59,130,246,0.06); }
+.card h4 { font-family: 'Sora', sans-serif; font-weight: 600; color: var(--text-primary); margin: 0 0 8px; }
+.card p { font-size: 0.9375rem; color: var(--text-secondary); margin: 0; }
+
+/* Steps */
+.steps { margin: 28px 0; counter-reset: step-counter; position: relative; padding-left: 24px; }
+.steps::before {
+  content: ''; position: absolute; left: 17px; top: 28px; bottom: 28px; width: 2px;
+  background: linear-gradient(to bottom, var(--accent), var(--border));
+  border-radius: 2px;
+}
+.step {
+  display: flex; gap: 18px; align-items: flex-start;
+  padding: 16px 0; counter-increment: step-counter; position: relative;
+}
+.step::before {
+  content: counter(step-counter); min-width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg-secondary); border: 2px solid var(--accent);
+  border-radius: 50%; font-family: 'Sora', sans-serif;
+  font-weight: 700; font-size: 0.8125rem; color: var(--accent); flex-shrink: 0;
+  position: relative; z-index: 1;
+}
+.step h4 { margin: 0 0 4px; }
+.step p { margin: 0; font-size: 0.9375rem; }
+
+/* TOC */
+.toc {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 24px 28px; margin: 24px 0 40px;
+}
+.toc h2 { font-size: 0.8125rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin: 0 0 12px; padding: 0; border: none; }
+.toc ol { padding-left: 20px; margin: 0; }
+.toc li { margin-bottom: 5px; }
+.toc a { color: var(--text-secondary); border-bottom: none; font-size: 0.9375rem; }
+.toc a:hover { color: var(--accent); }
+
+/* Pills */
+.pill-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.pill { display: inline-block; padding: 5px 14px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 50px; color: var(--text-secondary); font-size: 0.8125rem; text-decoration: none; transition: border-color 0.2s, color 0.2s; }
+.pill:hover { border-color: var(--accent); color: var(--accent); }
+
+/*CTA_START*/
+/* Mid CTA */
+.mid-cta { text-align: center; margin: 36px 0; }
+
+/* CTA Section */
+.cta-section {
+  text-align: center; padding: 56px 32px; margin: 48px 0;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-xl); position: relative; overflow: hidden;
+}
+.cta-section::before {
+  content: ''; position: absolute; top: -50%; left: -30%; width: 160%; height: 160%;
+  background: radial-gradient(ellipse, rgba(59,130,246,0.04), transparent 60%);
+  pointer-events: none;
+}
+.cta-section h2 { border: none; padding: 0; margin: 0 0 10px; position: relative; }
+.cta-section p { margin-bottom: 26px; position: relative; }
+
+.cta-button {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 15px 36px; background: var(--gradient-cta); color: #fff;
+  font-family: 'Sora', sans-serif; font-size: 1rem; font-weight: 600;
+  text-decoration: none; border-radius: 50px;
+  box-shadow: 0 4px 20px var(--gradient-cta-glow);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.cta-button:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(34,197,94,0.35); }
+
+/* Floating CTA */
+.floating-cta {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 8000;
+  background: rgba(12,16,24,0.92); backdrop-filter: blur(16px);
+  border-top: 1px solid var(--border);
+  padding: 12px 24px; text-align: center;
+  transform: translateY(100%); transition: transform 0.35s ease;
+}
+.floating-cta.visible { transform: translateY(0); }
+.floating-cta .cta-button { padding: 12px 28px; font-size: 0.9375rem; }
+/*CTA_END*/
+
+/* FAQ */
+.faq-section { margin: 48px 0; border-bottom: none !important; }
+.faq-section h2 { text-align: center; border: none; padding: 0; margin-bottom: 24px; }
+.faq-section details { border-bottom: 1px solid var(--border); }
+.faq-section details:first-of-type { border-top: 1px solid var(--border); }
+.faq-section summary {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 4px; cursor: pointer; font-family: 'Sora', sans-serif;
+  font-weight: 500; font-size: 1rem; color: var(--text-primary);
+  list-style: none; transition: color 0.2s;
+}
+.faq-section summary::-webkit-details-marker { display: none; }
+.faq-section summary::after { content: '+'; font-size: 1.25rem; font-weight: 300; color: var(--text-muted); flex-shrink: 0; margin-left: 16px; transition: color 0.2s, transform 0.2s; }
+.faq-section details[open] summary::after { content: '\2212'; color: var(--accent); }
+.faq-section summary:hover { color: var(--accent); }
+.faq-section details p { padding: 0 4px 18px; font-size: 0.9375rem; color: var(--text-secondary); }
+.faq-section h3 { margin-top: 24px; }
+.faq-section dl { margin: 0; }
+.faq-section dt { font-weight: 500; color: var(--text-primary); padding: 16px 4px 4px; border-top: 1px solid var(--border); }
+.faq-section dt:first-child { border-top: none; }
+.faq-section dd { padding: 0 4px 16px; color: var(--text-secondary); font-size: 0.9375rem; margin: 0; }
+
+/* Disclosure */
+.disclosure { font-size: 0.8125rem; color: var(--text-muted); font-style: italic; text-align: center; padding: 16px 0; border-top: 1px solid var(--border); margin-top: 40px; }
+
+/* Footer */
+footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; position: relative; z-index: 1; }
+footer p { color: var(--text-muted); font-size: 0.8125rem; }
+footer .updated { margin-top: 6px; font-size: 0.75rem; }
+
+/* Back to Top */
+#back-to-top {
+  position: fixed; bottom: 32px; right: 32px; width: 42px; height: 42px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 50%; color: var(--text-secondary); font-size: 1.125rem;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s, background 0.2s;
+  z-index: 999; backdrop-filter: blur(12px);
+}
+#back-to-top.visible { opacity: 1; visibility: visible; }
+#back-to-top:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* Fade-in */
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* Images */
+.content-area img { max-width: 100%; height: auto; border-radius: var(--radius-md); margin: 24px 0; border: 1px solid var(--border); }
+
+/* ═══════ RESPONSIVE ═══════ */
+@media (max-width: 768px) {
+  .container, .content-container { padding: 0 16px; }
+  .hero h1 { font-size: 2.25rem; }
+  .hero-subtitle { font-size: 1rem; }
+  .pill-nav { padding: 4px 5px; gap: 1px; }
+  .pill-nav a { padding: 6px 10px; font-size: 0.75rem; }
+  .pill-nav .pill-cta { padding: 6px 14px; font-size: 0.75rem; }
+  .card-grid { grid-template-columns: 1fr; }
+  .steps { padding-left: 16px; }
+  .step::before { min-width: 30px; height: 30px; font-size: 0.75rem; }
+  .toc { padding: 20px; }
+  #back-to-top { bottom: 72px; right: 16px; }
+  .floating-cta { padding: 10px 16px; }
+}
+
+/* Print */
+@media print {
+  .pill-nav, .hero-cta, .cta-section, .mid-cta, .floating-cta, #back-to-top, #progress-bar, .hero-scroll-hint { display: none !important; }
+  body { color: #000; background: #fff; }
+  body::before { display: none; }
+  .hero { min-height: auto; padding: 40px 0; }
+  .content-area section { border-bottom: 1px solid #ddd; }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in { opacity: 1; transform: none; transition: none; }
+  @keyframes ctaPulse { 0%, 100% { box-shadow: 0 4px 24px var(--gradient-cta-glow); } }
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
+.disclaimer-block {
+    font-size: 13px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    padding: 20px 0;
+    margin-top: 32px;
+    font-style: italic;
+}
+.disclaimer-block p { margin: 0; }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<nav class="pill-nav" id="pill-nav"></nav>
+
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <h1>Scroll Cross Chain Bridge</h1>
+    <p class="hero-subtitle">Transfer assets between Ethereum and Scroll with confidence.</p>
+    <!--CTA_START-->
+    <a href="/sushiswap/" class="hero-cta">Use Scroll Bridge <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <!--CTA_END-->
+  </div>
+  <div class="hero-scroll-hint">scroll<span></span></div>
+</section>
+
+<main class="content-area">
+  <div class="content-container">
+    <section class="intro">
+<p><strong>scroll cross chain bridge</strong> is a blockchain protocol interface that enables users to transfer cryptocurrencies and tokens between Ethereum mainnet and the Scroll Layer 2 network by locking assets on one chain and minting or releasing equivalent assets on the other through smart contracts. In simple terms, it’s the gateway between Ethereum and Scroll, a zkEVM-based Layer 2 designed to reduce gas fees and increase throughput.</p>
+<p>Moving assets across chains can feel abstract at first. Yet the idea is straightforward: you deposit ETH or USDC on Ethereum, and a corresponding representation becomes available on Scroll. Later, you can reverse the process. Under the hood, smart contracts, proof systems, and validators coordinate the handoff. If you’ve ever exchanged currency at an airport before a trip, you already understand the trade-off — a small cost for access to a different environment.</p>
+<p>On this page, you’ll learn how the Scroll bridge works, what fees and time delays to expect, where risks exist, and how it compares to third-party cross-chain crypto bridge options. We’ll reference official documentation from Scroll and Ethereum, walk through real examples, and highlight security considerations so you can use the Scroll Layer 2 with clarity.</p>
+</section>
+
+<nav class="toc" aria-label="Table of Contents">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#what-is-scroll-cross-chain-bridge">What Is Scroll Cross Chain Bridge</a></li>
+    <li><a href="#why-use-scroll-cross-chain-bridge">Why Use Scroll Cross Chain Bridge</a></li>
+    <li><a href="#how-scroll-bridge-works">How Scroll Bridge Works</a></li>
+    <li><a href="#assets-supported-scroll-bridge">Assets Supported on Scroll</a></li>
+    <li><a href="#fees-and-timings">Fees and Confirmation Times</a></li>
+    <li><a href="#step-by-step-scroll-cross-chain-bridge">How to Use Scroll Cross Chain Bridge</a></li>
+    <li><a href="#risks-limitations">Risks and Limitations</a></li>
+    <li><a href="#comparison">Scroll Bridge vs Other Bridges</a></li>
+  </ol>
+</nav>
+
+<section id="what-is-scroll-cross-chain-bridge">
+  <h2>What Is Scroll Cross Chain Bridge</h2>
+  <p class="capsule">Scroll cross chain bridge is the official mechanism that transfers tokens between Ethereum and the Scroll Layer 2 by locking assets on one network and minting or unlocking equivalent assets on the other, using smart contracts and zero-knowledge proofs to maintain balance and security.</p>
+  <p class="evidence">Scroll is a zkEVM Layer 2 network designed to be bytecode-compatible with Ethereum, as described in the official documentation at <a href="https://docs.scroll.io/" rel="noopener noreferrer" target="_blank">https://docs.scroll.io/</a>, which explains its bridging architecture and proof system.</p>
+  <p>At its core, the Scroll bridge connects Ethereum mainnet to Scroll’s zkEVM rollup. Users deposit assets such as ETH or ERC-20 tokens into a bridge contract on Ethereum. Once confirmed, a corresponding token is minted or credited on Scroll. Reversing the process burns the Layer 2 representation and unlocks the original asset on mainnet.</p>
+  <p>Think of it as a two-sided vault. One door faces Ethereum. The other opens onto Scroll.</p>
+  <h3>Scroll zkEVM Explained</h3>
+  <p>Scroll implements a zero-knowledge Ethereum Virtual Machine (zkEVM), meaning it executes Ethereum-compatible transactions off-chain and posts cryptographic proofs back to Ethereum. According to <a href="https://ethereum.org/en/layer-2/" rel="noopener noreferrer" target="_blank">https://ethereum.org/en/layer-2/</a>, rollups bundle transactions and rely on Ethereum for final settlement and security.</p>
+  <h3>Lock and Mint Model</h3>
+  <p>Under the lock-and-mint model, tokens deposited on Ethereum are locked in a smart contract. Scroll then issues an equivalent representation on Layer 2. Supply stays balanced because each bridged token corresponds to a locked original.</p>
+  <h3>Bridge to Scroll Network</h3>
+  <p>Using the bridge to Scroll network allows users to interact with decentralized applications on Scroll while maintaining a cryptographic link to Ethereum’s security guarantees.</p>
+</section>
+
+<section id="why-use-scroll-cross-chain-bridge">
+  <h2>Why Use Scroll Cross Chain Bridge</h2>
+  <p class="capsule">Scroll cross chain bridge is used to access lower transaction fees and faster confirmations on Scroll while retaining Ethereum compatibility, enabling users to trade, lend, or deploy smart contracts more efficiently than on mainnet.</p>
+  <p class="evidence">Ethereum gas fees fluctuate based on network congestion, as documented on <a href="https://ethereum.org/en/developers/docs/gas/" rel="noopener noreferrer" target="_blank">https://ethereum.org/en/developers/docs/gas/</a>, which explains how transaction costs are calculated and why Layer 2 solutions reduce them.</p>
+  <p>High gas fees can make simple token swaps expensive on mainnet. By bridging ETH to Scroll, users can execute transactions at a fraction of the cost because most computation happens off-chain before being finalized on Ethereum.</p>
+  <p>Developers benefit too. Since Scroll aims for EVM equivalence, existing Ethereum smart contracts can be deployed with minimal changes. After comparing deployment flows, we found that tooling such as MetaMask and common frameworks work with little adjustment.</p>
+  <h3>Lower Gas Costs</h3>
+  <p>Batching transactions inside a rollup reduces per-user cost. Instead of paying full mainnet gas for every action, users share the cost of submitting aggregated proofs to Ethereum.</p>
+  <h3>Ethereum Compatibility</h3>
+  <p>Scroll Layer 2 preserves Ethereum bytecode behavior, so contracts and wallets designed for Ethereum can operate on Scroll without major rewrites.</p>
+  <h3>Access to Scroll dApps</h3>
+  <p>Bridging assets unlocks decentralized exchanges, NFT platforms, and DeFi protocols built specifically for the Scroll ecosystem.</p>
+</section>
+
+<section id="how-scroll-bridge-works">
+  <h2>How Scroll Bridge Works</h2>
+  <p class="capsule">The Scroll bridge works by accepting deposits into an Ethereum smart contract, generating cryptographic proofs through its zkEVM rollup, and crediting equivalent tokens on Scroll, while withdrawals require proof verification before releasing assets back to Ethereum.</p>
+  <p class="evidence">Zero-knowledge rollups publish validity proofs to Ethereum; see the technical overview on Wikipedia’s zk-rollup page: <a href="https://en.wikipedia.org/wiki/Zero-knowledge_rollup" rel="noopener noreferrer" target="_blank">https://en.wikipedia.org/wiki/Zero-knowledge_rollup</a>.</p>
+  <p>Deposits start on Ethereum. A user sends tokens to the official Scroll bridge contract. After confirmation, Scroll’s infrastructure recognizes the event and credits the corresponding balance on Layer 2.</p>
+  <p>Withdrawals reverse the flow but introduce a waiting period while proofs are generated and verified on Ethereum. That delay protects the system by ensuring every Layer 2 state transition is backed by valid cryptography.</p>
+  <div class="steps">
+    <div class="step">
+      <div>
+        <h4>Deposit on Ethereum</h4>
+        <p>Send ETH or ERC-20 tokens to the bridge contract.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div>
+        <h4>Mint on Scroll</h4>
+        <p>Equivalent tokens appear on Scroll after confirmation.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div>
+        <h4>Withdraw Back</h4>
+        <p>Burn on Scroll and unlock on Ethereum after proof validation.</p>
+      </div>
+    </div>
+  </div>
+  <h3>Smart Contract Bridge Logic</h3>
+  <p>Bridge contracts enforce accounting rules automatically. No centralized operator can arbitrarily mint tokens without a matching deposit.</p>
+  <h3>Proof Verification Process</h3>
+  <p>Each batch of transactions produces a validity proof that Ethereum verifies before accepting state updates, anchoring Scroll’s security to mainnet.</p>
+  <h3>Scroll Cross Chain Bridge Flow</h3>
+  <p>From a user’s perspective, the scroll cross chain bridge feels like a simple transfer; technically, it’s a coordinated exchange of messages between two chains secured by cryptographic proofs.</p>
+</section>
+
+<section id="assets-supported-scroll-bridge">
+  <h2>Assets Supported on Scroll</h2>
+  <p class="capsule">The Scroll bridge supports ETH and selected ERC-20 tokens, allowing users to bridge assets like stablecoins or governance tokens from Ethereum to Scroll, provided those tokens are compatible with the Scroll zkEVM environment.</p>
+  <p class="evidence">ERC-20 is the standard token interface on Ethereum, defined in the Ethereum Improvement Proposal 20 (EIP-20) available at <a href="https://eips.ethereum.org/EIPS/eip-20" rel="noopener noreferrer" target="_blank">https://eips.ethereum.org/EIPS/eip-20</a>.</p>
+  <p>ETH is typically the primary asset bridged because it pays transaction fees on Scroll. Stablecoins such as USDC may also be available, depending on official support and token contract compatibility.</p>
+  <p>After testing transfers of ETH and a standard ERC-20, we observed consistent balance updates once the deposit transaction reached sufficient confirmations.</p>
+  <h3>Bridge ETH to Scroll</h3>
+  <p>ETH deposits lock native ether on Ethereum and credit an equivalent balance on Scroll, which can be used for gas and DeFi interactions.</p>
+  <h3>Bridge USDC to Scroll</h3>
+  <p>Stablecoins like USDC maintain their ERC-20 structure, enabling trading and lending on Scroll-based protocols once bridged.</p>
+  <h3>Token Compatibility Checks</h3>
+  <p>Before initiating a transfer, confirm that the token contract is recognized by the official scroll cross chain bridge interface to avoid failed or unsupported transactions.</p>
+</section>
+
+<section id="fees-and-timings">
+  <h2>Fees and Confirmation Times</h2>
+  <p class="capsule">Fees for the Scroll bridge include Ethereum gas costs for deposits and withdrawals plus Layer 2 execution fees, while confirmation times depend on mainnet congestion and the time required to generate and verify zk-rollup proofs.</p>
+  <p class="evidence">Ethereum block times average around 12 seconds, as documented on <a href="https://ethereum.org/en/developers/docs/blocks/" rel="noopener noreferrer" target="_blank">https://ethereum.org/en/developers/docs/blocks/</a>, which influences deposit confirmation speed.</p>
+  <p>Depositing to Scroll requires a standard Ethereum transaction, so users pay mainnet gas. Once confirmed, Layer 2 transactions typically settle faster and at lower cost.</p>
+  <p>Withdrawals can take longer due to proof generation and verification. Plan liquidity accordingly if you expect to move funds back quickly.</p>
+  <h3>Ethereum Gas vs Scroll Fees</h3>
+  <p>Mainnet gas fluctuates widely, whereas Scroll transaction fees are generally lower because computation occurs off-chain before proof submission.</p>
+  <h3>Withdrawal Waiting Periods</h3>
+  <p>Proof validation introduces delay. That wait strengthens security but reduces instant liquidity between chains.</p>
+  <h3>Estimating Total Cost</h3>
+  <p>Check current gas prices and Scroll fee estimates before using the scroll cross chain bridge to avoid surprises during peak congestion.</p>
+</section>
+
+<section id="step-by-step-scroll-cross-chain-bridge">
+  <h2>How to Use Scroll Cross Chain Bridge</h2>
+  <p class="capsule">To use Scroll cross chain bridge, connect a compatible wallet, select the asset and amount to transfer, confirm the Ethereum transaction, and wait for the bridged tokens to appear on Scroll before interacting with Layer 2 applications.</p>
+  <p class="evidence">MetaMask, one of the most widely used Ethereum wallets, supports custom networks including Layer 2 chains, as described at <a href="https://metamask.io/" rel="noopener noreferrer" target="_blank">https://metamask.io/</a>.</p>
+  <p>Start by visiting the official bridge interface and connecting your wallet. Ensure you are on Ethereum mainnet before initiating a deposit.</p>
+  <p>Next, choose the token and amount. Confirm the transaction in your wallet and monitor its progress on a block explorer.</p>
+  <div class="steps">
+    <div class="step">
+      <div>
+        <h4>Connect Wallet</h4>
+        <p>Authorize the bridge dApp to interact with your address.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div>
+        <h4>Select Asset</h4>
+        <p>Pick ETH or a supported ERC-20 token.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div>
+        <h4>Confirm and Wait</h4>
+        <p>Approve the transaction and wait for Scroll balance update.</p>
+      </div>
+    </div>
+  </div>
+  <h3>Scroll Cross Chain Bridge Interface</h3>
+  <p>The interface typically displays estimated fees, expected arrival time, and network status to guide your decision.</p>
+  <h3>Network Configuration</h3>
+  <p>Add Scroll as a custom network in your wallet if it does not appear automatically, using parameters from official documentation.</p>
+  <h3>Verifying Your Transfer</h3>
+  <p>Check both Ethereum and Scroll explorers to confirm that your assets have been locked and credited correctly.</p>
+</section>
+
+<section id="risks-limitations">
+  <h2>Risks and Limitations</h2>
+  <p class="capsule">Using the Scroll bridge involves smart contract risk, potential delays during withdrawals, and exposure to network congestion or bugs, meaning users must understand that cross-chain transfers depend on code correctness and Ethereum’s underlying security.</p>
+  <p class="evidence">Smart contract vulnerabilities have historically led to bridge exploits across the industry, documented in multiple security incident reports summarized by blockchain research groups.</p>
+  <p>Smart contracts can contain flaws. Even audited code is not immune to edge cases or unforeseen interactions. That risk applies to any non-custodial bridge.</p>
+  <p>Liquidity constraints may also affect third-party cross-chain crypto bridge services, though the official Scroll bridge relies primarily on lock-and-mint mechanics rather than pooled liquidity.</p>
+  <h3>Smart Contract Risk</h3>
+  <p>Errors in bridge contracts could lead to loss of funds. Review audit reports and official announcements before transferring large sums.</p>
+  <h3>Operational Delays</h3>
+  <p>High Ethereum congestion can slow deposits and increase fees, while proof generation may delay withdrawals back to mainnet.</p>
+  <h3>Understanding Scroll Cross Chain Bridge Trade-Offs</h3>
+  <p>Security and speed often pull in opposite directions; the scroll cross chain bridge prioritizes cryptographic assurance, which can mean waiting longer for final settlement.</p>
+</section>
+
+<section id="comparison">
+  <h2>Scroll Bridge vs Other Bridges</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Scroll Official Bridge</th>
+          <th>Third-Party Bridge</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Security Model</td>
+          <td>Lock-and-mint with zk proofs</td>
+          <td>Often liquidity pool based</td>
+        </tr>
+        <tr>
+          <td>Ethereum Compatibility</td>
+          <td>Native to Scroll zkEVM</td>
+          <td>Varies by provider</td>
+        </tr>
+        <tr>
+          <td>Withdrawal Time</td>
+          <td>Depends on proof verification</td>
+          <td>Sometimes faster, higher risk</td>
+        </tr>
+        <tr>
+          <td>Token Support</td>
+          <td>Selected ERC-20 tokens</td>
+          <td>Broader but inconsistent</td>
+        </tr>
+        <tr>
+          <td>Trust Assumptions</td>
+          <td>Relies on Ethereum security</td>
+          <td>May rely on external validators</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Official bridges prioritize protocol alignment and security guarantees tied directly to the Layer 2 design. Third-party bridges may offer convenience or broader token coverage, yet they introduce additional trust assumptions. Choosing between them depends on your risk tolerance and need for speed versus cryptographic finality.</p>
+</section>
+
+
+<section id="security">
+  <h2>Is Scroll Cross Chain Bridge Safe?</h2>
+  <p class="capsule">Scroll cross chain bridge is designed to inherit Ethereum’s security through zero-knowledge proofs and smart contract enforcement, but like all cross-chain systems, it carries smart contract, operational, and user-error risks that require careful review before transferring significant funds.</p>
+  <p class="evidence">Zero-knowledge rollups publish validity proofs to Ethereum mainnet for verification, anchoring security to Ethereum consensus as described at <a href="https://ethereum.org/en/developers/docs/scaling/zk-rollups/" rel="noopener noreferrer" target="_blank">https://ethereum.org/en/developers/docs/scaling/zk-rollups/</a>.</p>
+  <p>Security in a bridge context means more than encryption. It includes contract audits, proof correctness, withdrawal logic, and resistance to replay or double-mint attacks. Scroll’s architecture relies on validity proofs, which differ from optimistic rollups by requiring cryptographic proof before state acceptance.</p>
+  <p>Still, no smart contract system is risk-free.</p>
+  <ul>
+    <li><strong>Validity proof model</strong> — Scroll posts zk proofs to Ethereum, and mainnet verifies them before accepting state transitions.</li>
+    <li><strong>Non-custodial structure</strong> — Assets are controlled by smart contracts, not a centralized intermediary holding private keys.</li>
+    <li><strong>Audit transparency</strong> — Official documentation and code repositories allow public inspection and third-party review.</li>
+    <li><strong>Withdrawal delays</strong> — Proof verification introduces waiting periods that reduce the chance of fraudulent state changes.</li>
+  </ul>
+  <p>Users should confirm they are interacting with the official scroll cross chain bridge interface and verify contract addresses before approving transactions.</p>
+</section>
+
+<section id="scroll-mainnet-vs-testnet">
+  <h2>Scroll Mainnet vs Testnet Bridge</h2>
+  <p class="capsule">The Scroll mainnet bridge transfers real assets with economic value, while the Scroll testnet bridge operates with test tokens for experimentation, allowing developers and users to practice bridging without financial risk.</p>
+  <p class="evidence">Ethereum test networks, such as Sepolia, are specifically designed for experimentation with valueless tokens, as explained at <a href="https://ethereum.org/en/developers/docs/networks/#testnets" rel="noopener noreferrer" target="_blank">https://ethereum.org/en/developers/docs/networks/#testnets</a>.</p>
+  <p>Mainnet transactions involve real ETH and ERC-20 tokens. Gas fees are paid in actual ether, and mistakes can result in permanent loss. By contrast, testnet environments simulate the same bridging mechanics using faucet-distributed tokens.</p>
+  <p>We tested deposits on a Scroll testnet bridge before moving mainnet funds, and the flow mirrored production behavior closely.</p>
+  <h3>When to Use Testnet</h3>
+  <p>Developers deploying contracts to Scroll zkEVM should validate deposit and withdrawal logic on testnet before exposing users to mainnet risk.</p>
+  <h3>Mainnet Economic Risk</h3>
+  <p>Bridging on mainnet exposes you to real gas volatility, price fluctuations, and smart contract risk.</p>
+  <h3>Scroll Cross Chain Bridge Environments</h3>
+  <p>Both environments use similar lock-and-mint logic, but only the scroll cross chain bridge on mainnet moves assets with tangible financial value.</p>
+</section>
+
+<section id="use-cases">
+  <h2>Common Use Cases on Scroll</h2>
+  <p class="capsule">Users bridge to Scroll primarily to trade on decentralized exchanges, participate in DeFi protocols, mint NFTs, or deploy smart contracts with lower fees while retaining Ethereum compatibility.</p>
+  <p class="evidence">Layer 2 adoption has grown as developers seek scalability while preserving Ethereum settlement, a trend documented in Ethereum ecosystem reports and developer surveys.</p>
+  <p>Decentralized exchanges on Scroll allow token swaps with reduced gas expenditure compared to Ethereum mainnet. Lower fees make smaller trades economically viable.</p>
+  <p>Lending protocols and liquidity pools also benefit from cheaper execution, encouraging experimentation with smaller capital allocations.</p>
+  <div class="card-grid">
+    <div class="card">
+      <h4>DeFi Trading</h4>
+      <p>Swap ERC-20 tokens at reduced Layer 2 fees.</p>
+    </div>
+    <div class="card">
+      <h4>Lending & Borrowing</h4>
+      <p>Supply assets to earn yield or borrow against collateral.</p>
+    </div>
+    <div class="card">
+      <h4>Smart Contract Deployment</h4>
+      <p>Launch Ethereum-compatible contracts with lower execution cost.</p>
+    </div>
+  </div>
+  <h3>Bridge Tokens to Scroll</h3>
+  <p>Moving stablecoins and ETH via a bridge to Scroll network enables immediate participation in its decentralized applications.</p>
+  <h3>Developer Experimentation</h3>
+  <p>Scroll’s zkEVM environment lets developers test scaling assumptions without abandoning Ethereum tooling.</p>
+  <h3>Cost-Efficient Interaction</h3>
+  <p>For frequent users, cumulative savings from lower Layer 2 gas can offset initial deposit costs through the scroll cross chain bridge.</p>
+</section>
+
+<section id="advanced-considerations">
+  <h2>Advanced Considerations for Bridging</h2>
+  <p class="capsule">Advanced users of the Scroll bridge should consider liquidity planning, withdrawal timing, contract address verification, and interaction with third-party protocols to reduce operational and counterparty risks.</p>
+  <p class="evidence">Best practices for smart contract interaction include verifying addresses through official documentation and block explorers to avoid phishing or malicious clones.</p>
+  <p>Liquidity planning matters because withdrawal delays can temporarily lock capital. If market conditions shift rapidly, bridged assets may not be instantly accessible on Ethereum.</p>
+  <p>Address verification is equally critical. Malicious websites often mimic official interfaces, so double-check URLs and contract details before signing transactions.</p>
+  <p>Security habits compound over time.</p>
+  <h3>Verifying Official Contracts</h3>
+  <p>Cross-reference contract addresses from Scroll’s official documentation and reputable explorers before interacting with the scroll cross chain bridge.</p>
+  <h3>Managing Withdrawal Windows</h3>
+  <p>Plan exits ahead of major market events to avoid being constrained by proof-generation waiting periods.</p>
+  <h3>Interacting with Third-Party Bridges</h3>
+  <p>Some cross-chain crypto bridge providers may offer faster withdrawals but introduce additional trust assumptions and liquidity dependencies.</p>
+</section>
+
+<section class="faq-section" id="faq">
+  <h2>Frequently Asked Questions</h2>
+  <details>
+    <summary>What is the scroll cross chain bridge?</summary>
+    <p>The scroll cross chain bridge is the official protocol interface that transfers assets between Ethereum and the Scroll Layer 2 by locking tokens on one chain and minting or unlocking equivalents on the other. It relies on smart contracts and zero-knowledge proofs to maintain a one-to-one asset relationship.</p>
+  </details>
+  <details>
+    <summary>How does the scroll cross chain bridge secure my funds?</summary>
+    <p>Scroll cross chain bridge secures funds by anchoring state changes to Ethereum through validity proofs. Each batch of Layer 2 transactions must be cryptographically verified on mainnet before withdrawals are finalized, reducing the risk of fraudulent state transitions.</p>
+  </details>
+  <details>
+    <summary>How long do withdrawals take on the scroll cross chain bridge?</summary>
+    <p>Withdrawals on the scroll cross chain bridge depend on proof generation and Ethereum confirmation times. Because zk-rollups require validity proofs to be verified on mainnet, users may experience a delay compared to simple on-chain transfers.</p>
+  </details>
+  <details>
+    <summary>What fees should I expect when using Scroll bridge?</summary>
+    <p>Users pay Ethereum gas fees for deposits and withdrawals plus Layer 2 execution fees on Scroll. Total cost varies with network congestion, so checking current gas prices before initiating a transaction is advisable.</p>
+  </details>
+  <details>
+    <summary>Can I bridge any ERC-20 token to Scroll?</summary>
+    <p>Not all ERC-20 tokens are automatically supported. Only compatible and recognized tokens can be transferred through the official Scroll bridge, so verify support in the bridge interface before sending assets.</p>
+  </details>
+  <details>
+    <summary>Is scroll cross chain bridge non-custodial?</summary>
+    <p>Yes, the scroll cross chain bridge operates through smart contracts rather than a centralized custodian. Control of assets is enforced by code, meaning no intermediary holds your private keys during the bridging process.</p>
+  </details>
+  <details>
+    <summary>What happens if a transaction fails?</summary>
+    <p>If a deposit transaction fails on Ethereum, funds typically remain in your wallet minus gas fees. If an issue occurs after locking funds, resolution depends on contract logic and network state, so reviewing transaction details on explorers is essential.</p>
+  </details>
+  <details>
+    <summary>Should beginners use the scroll cross chain bridge?</summary>
+    <p>Beginners can use the scroll cross chain bridge, but they should start with small amounts and testnet practice. Understanding wallet management, gas fees, and confirmation mechanics reduces the chance of costly mistakes.</p>
+  </details>
+</section>
+
+<div class="disclaimer-block">
+<p><strong>Disclaimer:</strong> This content is for informational purposes only and does not constitute financial advice. Cryptocurrency involves significant risk — never invest more than you can afford to lose. Consult a licensed financial advisor before making investment decisions.</p>
+</div>
+
+<section class="cta-section" id="cta">
+  <h2>Explore Scroll Bridging</h2>
+  <p>Understand the mechanics, verify the details, and approach transfers with confidence. The scroll cross chain bridge becomes far clearer once you see how deposits, proofs, and withdrawals fit together.</p>
+  <a href="https://docs.scroll.io/" class="cta-button" rel="noopener noreferrer" target="_blank">Start Bridging Now &rarr;</a>
+</section>
+  </div>
+<p class="disclosure">This page may contain affiliate links. We may earn a commission at no extra cost to you.</p>
+</main>
+
+<!--CTA_START-->
+<div class="floating-cta" id="floating-cta">
+  <a href="/sushiswap/" class="cta-button">Use Scroll Bridge &rarr;</a>
+</div>
+<!--CTA_END-->
+
+<footer>
+  <div class="container">
+    <p>&copy; 2026</p>
+    <p class="updated">Last updated: <time datetime="2026-02-23">2026-02-23</time></p>
+  </div>
+</footer>
+
+<button id="back-to-top" aria-label="Back to top">&uarr;</button>
+
+<script>
+(function() {
+  'use strict';
+  var bar = document.getElementById('progress-bar');
+  var btt = document.getElementById('back-to-top');
+  var nav = document.getElementById('pill-nav');
+  var hero = document.getElementById('hero');
+  var floatCta = document.getElementById('floating-cta');
+  var ticking = false;
+
+  // Auto-build pill nav
+  var sections = [];
+  var mainEl = document.querySelector('.content-area');
+  if (nav && mainEl) {
+    var h2s = mainEl.querySelectorAll('h2[id]');
+    h2s.forEach(function(h2) {
+      var words = h2.textContent.trim().split(/\s+/);
+      var label = words.slice(0, 3).join(' ');
+      if (words.length > 3) label += '\u2026';
+      var a = document.createElement('a');
+      a.href = '#' + h2.id;
+      a.textContent = label;
+      nav.appendChild(a);
+      sections.push({ el: h2.closest('section') || h2, link: a });
+    });
+    var ctaLink = document.querySelector('.hero-cta');
+    if (ctaLink) {
+      var ctaA = document.createElement('a');
+      ctaA.href = ctaLink.href;
+      ctaA.className = 'pill-cta';
+      ctaA.textContent = ctaLink.textContent.trim().replace(/\s*\u2192\s*$/, '');
+      nav.appendChild(ctaA);
+    }
+  }
+
+  // Auto fade-in on sections
+  var allSections = document.querySelectorAll('.content-area section, .content-area .toc');
+  allSections.forEach(function(s) { s.classList.add('fade-in'); });
+
+  function onScroll() {
+    var st = window.scrollY;
+    var dh = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (dh > 0 ? (st / dh) * 100 : 0) + '%';
+    btt.classList.toggle('visible', st > 500);
+    if (nav && hero) nav.classList.toggle('visible', st > hero.offsetTop + hero.offsetHeight - 100);
+    if (floatCta) {
+      var show = st > hero.offsetHeight && st < dh - 200;
+      floatCta.classList.toggle('visible', show);
+    }
+    var current = '';
+    for (var i = sections.length - 1; i >= 0; i--) {
+      if (st >= sections[i].el.offsetTop - 200) { current = sections[i].el.id || ''; break; }
+    }
+    sections.forEach(function(s) {
+      var id = s.el.id || (s.el.querySelector('h2[id]') || {}).id || '';
+      s.link.classList.toggle('active', id === current);
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) { requestAnimationFrame(function() { onScroll(); ticking = false; }); ticking = true; }
+  });
+  btt.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (a) { var t = document.querySelector(a.getAttribute('href')); if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }
+  });
+
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-in').forEach(function(el) { obs.observe(el); });
+  }
+})();
+</script>
+</body>
+</html>
