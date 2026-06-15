@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /sushiswap/
-Sitemap: https://scroll-cross-chain-bridge.github.io/sitemap.xml
